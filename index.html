@@ -7,41 +7,56 @@
   body {
     margin:0; height:100vh; display:flex;
     justify-content:center; align-items:center;
-    font-family:sans-serif; font-size:24px; color:#fff;
+    font-family:sans-serif; font-size:40px; color:#fff;
     background:#000;
+  }
+  #loader {
+    animation: blink 1s infinite;
   }
   #flash {
     position:fixed; inset:0;
     display:flex; align-items:center; justify-content:center;
     font-size:28px; font-weight:bold;
     color:#fff; background:red;
-    animation: flash 0.4s infinite alternate, shake 0.1s infinite;
+    visibility:hidden; opacity:0;
+    transition:opacity .2s;
+  }
+  #flash.show {
+    visibility:visible; opacity:1;
+    animation: flash 0.5s 2 alternate;
   }
   @keyframes flash {
     from { background:red; }
     to   { background:green; }
   }
-  @keyframes shake {
-    0%   { transform: translate(0, 0); }
-    25%  { transform: translate(-10px, 5px); }
-    50%  { transform: translate(10px, -5px); }
-    75%  { transform: translate(-10px, -5px); }
-    100% { transform: translate(10px, 5px); }
+  @keyframes blink {
+    50% { opacity:0.3; }
   }
 </style>
 </head>
 <body>
 
-<div id="flash">🔥اخويا الي بحبة🔥</div>
+<!-- الايموجي اللي بيظهر كتحميل -->
+<div id="loader">⏳</div>
+
+<div id="flash">🔥 مقلب 🔥</div>
 
 <script>
-  // بعد 2 ثواني يفتح الواتساب
+  const flash = document.getElementById('flash');
+  const loader = document.getElementById('loader');
+
+  // بعد ثانية: يخفي الايموجي ويظهر الفلاش
   setTimeout(() => {
-    window.location.href = "https://wa.me/201022210793";
-    // 👆 غيّر الرقم ده لرقمك (مع كود الدولة)
-  }, 3000);
+    loader.style.display = "none";
+    flash.classList.add('show');
+  }, 1000);
+
+  // بعد 1.5 ثانية: يفتح واتساب
+  setTimeout(() => {
+    window.location.href = "https://wa.me/201022210807";
+    // 👆 غيّر الرقم ده لرقمك مع كود الدولة
+  }, 1500);
 </script>
 
 </body>
 </html>
-
