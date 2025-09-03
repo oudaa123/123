@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<title>مقلب واتساب</title>
+<style>
+  body {
+    margin:0; display:flex; justify-content:center; align-items:center;
+    height:100vh; background:#111;
+  }
+  img {
+    width:300px; cursor:pointer; border-radius:10px;
+  }
+  #overlay {
+    position:fixed; inset:0; background:red; display:flex;
+    align-items:center; justify-content:center;
+    color:#fff; font-size:24px; font-family:sans-serif;
+    visibility:hidden; opacity:0; transition:opacity .3s;
+  }
+  #overlay.show {visibility:visible; opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- الصورة فقط -->
+<img src="https://i.ytimg.com/vi/8JU2cMJsuIM/maxresdefault.jpg" id="prankImg" alt="اضغط هنا" />
+
+<div id="overlay">🔥 اخويا الي بحبه 🔥</div>
+
+<script>
+  const img = document.getElementById('prankImg');
+  const overlay = document.getElementById('overlay');
+
+  img.addEventListener('click', () => {
+    // تظهر الشاشة الحمراء
+    overlay.classList.add('show');
+
+    // بعد نص ثانية تختفي (فلاش)
+    setTimeout(() => {
+      overlay.classList.remove('show');
+    }, 500);
+
+    // بعد ثانية يفتح واتساب
+    setTimeout(() => {
+      window.location.href = "https://wa.me/201022210807";
+      // 👆 غيّر الرقم ده برقمك مع كود الدولة
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
