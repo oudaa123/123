@@ -5,49 +5,42 @@
 <title>مقلب واتساب</title>
 <style>
   body {
-    margin:0; display:flex; justify-content:center; align-items:center;
-    height:100vh; background:#111;
+    margin:0; height:100vh; display:flex;
+    justify-content:center; align-items:center;
+    font-family:sans-serif; font-size:24px; color:#fff;
+    background:#000;
   }
-  img {
-    width:300px; cursor:pointer; border-radius:10px;
+  #flash {
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:28px; font-weight:bold;
+    color:#fff; background:red;
+    animation: flash 0.4s infinite alternate, shake 0.1s infinite;
   }
-  #overlay {
-    position:fixed; inset:0; background:red; display:flex;
-    align-items:center; justify-content:center;
-    color:#fff; font-size:24px; font-family:sans-serif;
-    visibility:hidden; opacity:0; transition:opacity .3s;
+  @keyframes flash {
+    from { background:red; }
+    to   { background:green; }
   }
-  #overlay.show {visibility:visible; opacity:1;}
+  @keyframes shake {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-10px, 5px); }
+    50%  { transform: translate(10px, -5px); }
+    75%  { transform: translate(-10px, -5px); }
+    100% { transform: translate(10px, 5px); }
+  }
 </style>
 </head>
 <body>
 
-<!-- الصورة فقط -->
-<img src="file:///C:/Users/DELL/Downloads/c8d97ea8-246a-45bb-94e7-0066b29dcce6.jpg" id="prankImg" alt="اضغط هنا" />
-
-<div id="overlay">🔥 اخويا الي بحبه 🔥</div>
+<div id="flash">🔥اخويا الي بحبة🔥</div>
 
 <script>
-  const img = document.getElementById('prankImg');
-  const overlay = document.getElementById('overlay');
-
-  img.addEventListener('click', () => {
-    // تظهر الشاشة الحمراء
-    overlay.classList.add('show');
-
-    // بعد نص ثانية تختفي (فلاش)
-    setTimeout(() => {
-      overlay.classList.remove('show');
-    }, 500);
-
-    // بعد ثانية يفتح واتساب
-    setTimeout(() => {
-      window.location.href = "https://wa.me/201022210807";
-      // 👆 غيّر الرقم ده برقمك مع كود الدولة
-    }, 1000);
-  });
+  // بعد 3 ثواني يفتح الواتساب
+  setTimeout(() => {
+    window.location.href = "https://wa.me/201022210807";
+    // 👆 غيّر الرقم ده لرقمك (مع كود الدولة)
+  }, 3000);
 </script>
 
 </body>
 </html>
-
