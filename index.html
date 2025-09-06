@@ -95,6 +95,29 @@
     font-weight: bold;
     color: green;
   }
+
+  /* تحسين العرض على الشاشات الصغيرة */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2em;
+    }
+    header h2 {
+      font-size: 1.2em;
+    }
+    .service-btn {
+      width: 90%;
+      padding: 12px;
+      font-size: 1.1em;
+    }
+    form {
+      width: 90%;
+      padding: 15px;
+    }
+    form button {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
 </style>
 </head>
 <body>
@@ -188,7 +211,7 @@ const msgEl = document.getElementById("message");
 
 form.addEventListener("submit", e => {
   e.preventDefault();
-  msgEl.textContent = " تم التأكيد الحجز العياده سوف تتواصل معك✅";
+  msgEl.textContent = "تم التأكيد الحجز العياده سوف تتواصل معك ✅";
 
   const data = {
     name: document.getElementById("name").value,
