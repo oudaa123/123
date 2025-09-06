@@ -1,63 +1,215 @@
-<!doctype html>
-<html lang="ar">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<title>مقلب واتساب</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYACINTH NUTRITION - الدكتورة فاطمة محمد</title>
 <style>
   body {
-    margin:0; height:100vh; display:flex;
-    justify-content:center; align-items:center;
-    font-family:sans-serif; font-size:40px; color:#fff;
-    background:#000;
+    font-family: Tahoma, sans-serif;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin: 0;
+    padding: 0;
   }
-  #loader {
-    animation: blink 1s infinite;
+  header {
+    background-color: #8a2be2; /* موف */
+    color: white;
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  #flash {
-    position:fixed; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:28px; font-weight:bold;
-    color:#fff; background:red;
-    visibility:hidden; opacity:0;
-    transition:opacity .2s;
+  header img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
   }
-  #flash.show {
-    visibility:visible; opacity:1;
-    animation: flash 0.5s 2 alternate;
+  header h1 {
+    font-size: 2.8em;
+    margin: 0;
   }
-  @keyframes flash {
-    from { background:red; }
-    to   { background:green; }
+  header h2 {
+    margin:5px 0 0 0; 
+    font-size:1.5em; 
+    font-weight:normal;
   }
-  @keyframes blink {
-    50% { opacity:0.3; }
+  .service-btn {
+    background-color: #ffffff; /* أبيض */
+    color: #8a2be2; /* موف */
+    border: none;
+    padding: 18px 28px;
+    margin: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: 0.3s;
+    font-weight: bold;
+  }
+  .service-btn:hover {
+    background-color: #e0d4f7;
+  }
+  #service-details {
+    text-align: right;
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  form {
+    max-width: 500px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: right;
+  }
+  form input, form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  form button {
+    width: 48%;
+    padding: 14px;
+    margin: 5px 1%;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+  }
+  #submit-btn { background-color: #8a2be2; }
+  #fb-btn { background-color: #3b5998; }
+  #submit-btn:hover { background-color: #6a1fbf; }
+  #fb-btn:hover { background-color: #2d4373; }
+  #message {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
   }
 </style>
 </head>
 <body>
 
-<!-- الايموجي اللي بيظهر كتحميل -->
-<div id="loader">⏳</div>
+<header>
+  <img src="flower.png" alt="Flower">
+  <h1>HYACINTH NUTRITION</h1>
+  <h2>الدكتورة فاطمة محمد</h2>
+  <div>
+    <button class="service-btn" data-service="تخسيس">تخسيس / إنقاص وزن</button>
+    <button class="service-btn" data-service="كبد">كبد / صحة الكبد</button>
+    <button class="service-btn" data-service="لياقة">لياقة / تحسين الأداء الرياضي</button>
+    <button class="service-btn" data-service="سكر">سكر / تنظيم مستوى الجلوكوز</button>
+  </div>
+</header>
 
-<div id="flash">🔥 بحبك ياصحبي 🔥</div>
+<div id="service-details">
+  <p>اختر الخدمة لمعرفة التفاصيل.</p>
+</div>
+
+<form id="regForm">
+  <input type="text" id="name" placeholder="الاسم بالكامل" required>
+  <input type="text" id="contact" placeholder="رقم التواصل" required>
+  <select id="condition" required>
+    <option value="">اختر حالتك</option>
+    <option value="تخسيس">تخسيس</option>
+    <option value="كبد">كبد</option>
+    <option value="لياقة">لياقة</option>
+    <option value="سكر">سكر</option>
+  </select>
+  <div>
+    <button type="submit" id="submit-btn">احجز الان وتابع حالتك أونلاين</button>
+    <button type="button" id="fb-btn" onclick="window.open('https://www.facebook.com/share/166UYn5Cwd/?mibextid=wwXIfr', '_blank')">تواصل مع الدكتورة فاطمة</button>
+  </div>
+  <div id="message"></div>
+</form>
 
 <script>
-  const flash = document.getElementById('flash');
-  const loader = document.getElementById('loader');
+const SERVER_URL = "https://script.google.com/macros/s/AKfycbz-jsA5uInXKWIE2i6ll34TVY_Hz8cMHZoJly_QyZ6UoVtL3QQ7JYCiyKsmvmdQhYg7Mw/exec";
 
-  // بعد ثانية: يخفي الايموجي ويظهر الفلاش
-  setTimeout(() => {
-    loader.style.display = "none";
-    flash.classList.add('show');
-  }, 1000);
+const details = {
+  "تخسيس": `
+    <h3>تخسيس / إنقاص وزن</h3>
+    <ul>
+      <li>تحليل الوزن الحالي ونسبة الدهون في الجسم.</li>
+      <li>حساب السعرات الحرارية المطلوبة يوميًا.</li>
+      <li>وضع خطة غذائية مفصلة بالأيام والوجبات.</li>
+      <li>متابعة أسبوعية للوزن والقياسات وتعديل النظام إذا لزم.</li>
+      <li>نصائح رياضية وخطوات لتحسين النشاط البدني.</li>
+    </ul>
+  `,
+  "كبد": `
+    <h3>كبد / صحة الكبد</h3>
+    <ul>
+      <li>تقييم وظائف الكبد والفحوصات السابقة.</li>
+      <li>نصائح غذائية لتقليل الدهون والكوليسترول.</li>
+      <li>متابعة الدهون الثلاثية والإنزيمات الدهنية في الدم.</li>
+      <li>تعليمات حول المكملات الطبيعية أو العلاج الغذائي لدعم الكبد.</li>
+    </ul>
+  `,
+  "لياقة": `
+    <h3>لياقة / تحسين الأداء الرياضي</h3>
+    <ul>
+      <li>تقييم مستوى اللياقة البدنية الحالي.</li>
+      <li>نظام غذائي يدعم الطاقة وبناء العضلات.</li>
+      <li>توجيهات عن البروتين والكربوهيدرات قبل وبعد التمرين.</li>
+      <li>نصائح للترطيب الصحيح والتعافي بعد التمرين.</li>
+    </ul>
+  `,
+  "سكر": `
+    <h3>سكر / تنظيم مستوى الجلوكوز</h3>
+    <ul>
+      <li>متابعة مستويات السكر وصحة البنكرياس.</li>
+      <li>نظام غذائي منخفض المؤشر الجلايسيمي.</li>
+      <li>تقسيم الوجبات خلال اليوم مع التحكم بالسكر في الدم.</li>
+      <li>نصائح رياضية خفيفة وآمنة لمرضى السكري.</li>
+    </ul>
+  `
+};
 
-  // بعد 1.5 ثانية: يفتح واتساب
-  setTimeout(() => {
-    window.location.href = "https://wa.me/201022210793";
-    // 👆 غيّر الرقم ده لرقمك مع كود الدولة
-  }, 1500);
+document.querySelectorAll('.service-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const service = btn.dataset.service;
+    document.getElementById('service-details').innerHTML = details[service];
+    document.getElementById('condition').value = service; // مزامنة الفورم مع الزر
+  });
+});
+
+const form = document.getElementById("regForm");
+const msgEl = document.getElementById("message");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  msgEl.textContent = " تم التأكيد الحجز العياده سوف تتواصل معك✅";
+
+  const data = {
+    name: document.getElementById("name").value,
+    contact: document.getElementById("contact").value,
+    condition: document.getElementById("condition").value
+  };
+
+  fetch(SERVER_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(resp => {
+    if(resp.status === "ok") form.reset();
+  })
+  .catch(err => {
+    console.error(err);
+    msgEl.textContent = "❌ خطأ في الاتصال بالسيرفر — تحقق من نشر Web App";
+  });
+});
 </script>
 
 </body>
 </html>
-
